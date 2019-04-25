@@ -25,7 +25,25 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="Food:" label-for="input-3">
+      <b-form-group id="input-group-3" label="Expression:" label-for="input-3">
+        <b-form-input
+          id="input-2"
+          v-model="form.expr"
+          required
+          placeholder="1 + 2"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-row>
+        <b-col>
+          <strong>Result:</strong>
+        </b-col>
+        <b-col>
+          <italic v-text="calc(form.expr)"></italic>
+        </b-col>
+      </b-form-row>
+
+      <b-form-group id="input-group-4" label="Food:" label-for="input-4">
         <b-form-select
           id="input-3"
           v-model="form.food"
@@ -34,7 +52,7 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-4">
+      <b-form-group id="input-group-5">
         <b-form-checkbox-group v-model="form.checked" id="checkboxes-4">
           <b-form-checkbox value="me">Check me out</b-form-checkbox>
           <b-form-checkbox value="that">Check that out</b-form-checkbox>
@@ -58,6 +76,8 @@
           email: '',
           name: '',
           food: null,
+          expr: '',
+          result: '',
           checked: []
         },
         foods: [{ text: 'Select One', value: null }, 'Carrots', 'Beans', 'Tomatoes', 'Corn'],
@@ -65,6 +85,9 @@
       }
     },
     methods: {
+      calc(expr) {
+        return eval(expr);
+      },
       onSubmit(evt) {
         evt.preventDefault()
         alert(JSON.stringify(this.form))
